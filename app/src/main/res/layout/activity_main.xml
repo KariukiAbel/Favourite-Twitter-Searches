@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:id="@+id/tableLayout"
+    android:padding="5dp"
+    android:stretchColumns="*">
+
+    <TableRow
+        android:id="@+id/tableRow0"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <EditText
+            android:id="@+id/queryEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_span="2"
+            android:hint="@string/queryPrompt"
+            android:imeOptions="actionNext">
+        </EditText>
+</TableRow>
+
+    <!-- tableRow1 -->
+     <TableRow
+         android:id="@+id/tableRow1"
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent">
+        <EditText android:layout_height="wrap_content"
+            android:inputType="text"
+            android:id="@+id/tagEditText"
+            android:layout_gravity="center_vertical">
+        </EditText>
+         <Button android:id="@+id/saveButton"
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:layout_gravity="center_vertical"
+             android:text="@string/save"></Button>
+     </TableRow>
+
+    <!-- Tablerow 2-->
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/light_orange">
+        <TextView
+            android:id="@+id/taggedSearchesTextView"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:textSize="12dp"
+            android:padding="5dp"
+            android:layout_span="2"
+            android:textColor="@android:color/black"
+            android:text="@string/taggedSearches"
+            ></TextView>
+    </TableRow>
+
+<!--    TableRow 3-->
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_weight="1">
+        <ScrollView
+            android:id="@+id/queryScrollView"
+            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:layout_span="2">
+            <TableLayout
+                android:id="@+id/queryTableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*"></TableLayout>
+        </ScrollView>
+    </TableRow>
+
+<!--    TableRow 4-->
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <Button
+            android:id="@+id/clearTaggButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clearTags"
+            android:layout_marginTop="5dp"
+            android:layout_span="2"></Button>
+    </TableRow>
 
 </TableLayout>
