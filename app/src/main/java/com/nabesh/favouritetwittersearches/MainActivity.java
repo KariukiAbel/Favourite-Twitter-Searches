@@ -2,8 +2,11 @@ package com.nabesh.favouritetwittersearches;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -56,5 +59,23 @@ public class MainActivity extends AppCompatActivity {
         if(originalQuery == null){
             refreshButtons(tag);
         }
+    }
+
+    public void makeTagGui(String tag, int index){
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View newTagView = inflater.inflate(R.layout.new_tag_view, null);
+
+        Button newTagButton = newTagView.findViewById(R.id.newTagButton);
+        newTagButton.setText(tag);
+        newTagButton.setOnClickListener(queryButtonListener);
+
+        Button newEditButton = newTagView.findViewById(R.id.newEditButton);
+        newEditButton.setOnClickListener(editButtonListener);
+
+        queryTableLayout.addView(newTagView, index);
+    }
+
+    private void clearButtons(){
+        queryTableLayout.removeAllViews();
     }
 }
