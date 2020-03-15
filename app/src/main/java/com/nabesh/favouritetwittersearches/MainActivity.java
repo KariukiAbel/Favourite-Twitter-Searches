@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         Arrays.sort(tags, String.CASE_INSENSITIVE_ORDER);
 
         if (newTags != null){
-            makeTagGui(newTag, Arrays.binarySearch(tags, newTag));
+            makeTagGui(newTags, Arrays.binarySearch(tags, newTags));
         }else{
             for(int index = 0; index < tags.length; ++index){
                 makeTagGui(tags[index], index);
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     public View.OnClickListener queryButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String buttonText = ((Button)v).getText().toString();
+            String buttonText = ((Button)view).getText().toString();
             String query = savedSearches.getString(buttonText, null);
 
             //create the URL corresponding toto the touched Button query
