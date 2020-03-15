@@ -4,7 +4,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,5 +113,19 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public View.OnClickListener queryButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            String buttonText = ((Button)v).getText().toString();
+            String query = savedSearches.getString(buttonText, null);
+
+            //create the URL corresponding toto the touched Button query
+            String URLstring = getString(R.string.searchURL) + query;
+
+            //Creating an intent to launch the web browser
+            Intent getURL = new Intent(Intent.ACTION_VIEW, Uri.parse(URLstring));
+            startActivity(getURL);
+        }
+    };
 
 }
