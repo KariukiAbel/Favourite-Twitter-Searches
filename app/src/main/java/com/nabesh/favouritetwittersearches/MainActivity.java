@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                         .hideSoftInputFromWindow(tagEditText.getWindowToken(), 0);
             }
             else{
-                //Create a new lert Dialog bulider
+                //Create a new alert Dialog bulider
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle(R.string.missingTitle);
                 //provides the ok button that dismisses it
@@ -111,6 +112,28 @@ public class MainActivity extends AppCompatActivity {
                 errDialog.show();
 
             }
+        }
+    };
+
+    public View.OnClickListener clearTagsButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle(R.string.confirmTitle);
+            builder.setPositiveButton(R.string.erase, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    clearButtons();
+                    SharedPreferences.Editor preferenceEditor = savedSearches.edit();
+                    preferenceEditor.clear();
+                    preferenceEditor.apply();
+                }
+            });
+            builder.setCancelable(true);
+            builder.setNegativeButton(R.string.cancel, null);
+            builder.setMessage(R.string.confirmMessage);
+            AlertDialog confirmDialog = builder.create();
+            confirmDialog.show();
         }
     };
 
@@ -142,5 +165,7 @@ public class MainActivity extends AppCompatActivity {
             queryEditText.setText(savedSearches.getString(tag, null));
         }
     };
+
+
 
 }
