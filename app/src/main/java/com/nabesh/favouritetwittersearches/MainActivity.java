@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 
 import java.util.Arrays;
 
@@ -125,6 +126,20 @@ public class MainActivity extends AppCompatActivity {
             //Creating an intent to launch the web browser
             Intent getURL = new Intent(Intent.ACTION_VIEW, Uri.parse(URLstring));
             startActivity(getURL);
+        }
+    };
+
+    public View.OnClickListener editButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //get all necessary GUI components
+            TableRow buttonTableRow = (TableRow) view.getParent();
+            Button searchButton = buttonTableRow.findViewById(R.id.newTagButton);
+            String tag = searchButton.getText().toString();
+
+            //set the EditText to match the chosen tag and query
+            tagEditText.setText(tag);
+            queryEditText.setText(savedSearches.getString(tag, null));
         }
     };
 
