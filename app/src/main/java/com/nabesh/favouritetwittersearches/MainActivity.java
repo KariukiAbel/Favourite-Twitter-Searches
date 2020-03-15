@@ -1,5 +1,6 @@
 package com.nabesh.favouritetwittersearches;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -7,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         if (newTags != null){
             makeTagGui(newTag, Arrays.binarySearch(tags, newTag));
         }else{
-            for(int index = 0, index < tags.length, ++index){
+            for(int index = 0; index < tags.length; ++index){
                 makeTagGui(tags[index], index);
             }
         }
@@ -78,4 +80,36 @@ public class MainActivity extends AppCompatActivity {
     private void clearButtons(){
         queryTableLayout.removeAllViews();
     }
+
+    public View.OnClickListener saveButtonListener = new View.OnClickListener(){
+
+        @Override
+        public void onClick(View view) {
+            if(queryEditText.getText().length() > 0 && tagEditText.getText().length() > 0){
+                makeTag(queryEditText.getText().toString(), tagEditText.getText().toString());
+                queryEditText.setText("");
+                tagEditText.setText("");
+
+                //hide soft keyboard
+                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
+                        .hideSoftInputFromWindow(tagEditText.getWindowToken(), 0);
+            }
+            else{
+                //Create a new lert Dialog bulider
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle(R.string.missingTitle);
+                //provides the ok button that dismisses it
+                builder.setPositiveButton(R.string.ok, null);
+                //set the message on the alert
+                builder.setMessage(R.string.missingMessage);
+
+                //create the alert dialog from the AlertDialog.Builder
+                AlertDialog errDialog = builder.create();
+                errDialog.show();
+
+            }
+        }
+    };
+
+
 }
